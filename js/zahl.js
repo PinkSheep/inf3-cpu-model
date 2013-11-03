@@ -18,7 +18,7 @@ Zahl.prototype.getDecValue = function(bitString){
 	} else{
 		binArr[0] = '0';
 		var tempBitStr = binArr.join('');
-		return (-32768 + tempBitStr.parseInt(binary,2);
+		return (-32768 + tempBitStr.parseInt(binary,2));
 	}
 };
 
@@ -50,8 +50,8 @@ Zahl.prototype.zweierkomp = function(zahl){
 		  			} else {
 		  				objValue = "0";
 		  			}
-		    };
-		)
+		    }
+		);
 		//addiere plus eins im binärsystem
 		for (var i = zweierArr.length-1; i >= 0; i--){
 			if (zweierArr[i] == "1") {

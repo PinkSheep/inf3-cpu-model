@@ -62,8 +62,8 @@ Befehlssatz.prototype.and = function(reg){
 	    		value = '0';
 	    	};
 
-	    };
-	)
+	    }
+	);
 };
 
 Befehlssatz.prototype.or = function(reg){
@@ -71,7 +71,7 @@ Befehlssatz.prototype.or = function(reg){
 	var akkuArr = this.akku.getBin().split('');
 	//  binary value in register
 	var regArr = reg.getBin().split('');
-	// compare akku and registry and do a logical and between the two
+	// compare akku and registry and do a logical or between the two
 	$.each(
 	    akkuArr,
 	    function( index, value ){
@@ -83,8 +83,8 @@ Befehlssatz.prototype.or = function(reg){
 	    		value = '0';
 	    	};
 
-	    };
-	)
+	    }
+	);
 };
 
 Befehlssatz.prototype.not = function() {
@@ -98,8 +98,8 @@ Befehlssatz.prototype.not = function() {
 	  			} else {
 	  				objValue = "0";
 	  			}
-	    };
-	)
+	    }
+	);
 };
 
 
