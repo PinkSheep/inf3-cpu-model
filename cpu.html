@@ -54,28 +54,48 @@
     <div class="row">
       <div class="span4">
         <h1>Programmcode</h1>    
-        <form><textarea id="befehle"></textarea><input type="button" name="Submit" id="submitBefehle"></form>
+        <form><textarea id="befehle"></textarea><input type="button" name="Submit" id="submitBefehle" value="Submit"></form>
+      </div>
+      <div class="span6 offset2">
+        <h1>Parameter (Speicher)</h1>    
+        <form><textarea id="parameter"></textarea><input type="button" name="Submit" id="submitParameter" value="Submit"></form>
+       </div> 
     </div>
-    <div>
-      <div class="span4 offset2"><form><p><label>Zahl1:</label><input type="text" id="zahl1" ></p><p><label>Zahl2:</label><input type="text" id="zahl2"></p></form></div>
-    </div>
+    <hr>
+
 
       <!-- Example row of columns -->
       <div class="row">
-        <div class="span6">
-          <h2>Befehle</h2>
-          <p id=2"test"></p>
-          <table id="befehlTabelle"></table>
+        <div class="span3">
+          <h3>Befehle</h3>
+          <table id="befehlTabelle" class="table"></table>
+        </div>
+        <div class="span3">
+          <h3>Speicher</h3>
+          <table id="speicherTabelle" class="table"></table>
         </div>
         <div class="span6">
-          <h2>Learning Mode</h2>
-          <p>In the learning mode you can go trough your learning card sets in a randomized order. Don't forget to create and add content to your sets first!</p>
-          <p><a class="btn" href="learn.html">Bring me there &raquo;</a></p>
-       </div>
+          <div class="btn-group">
+            <button class="btn" id="run">Run</button>
+            <button class="btn" id="slow">Slow Modus</button>
+            <button class="btn" id="step">Step Modus</button>
+          </div>
+          <div class="row-fluid">
+            <div class="span6">
+              <div id="akku"><h4>Akku:</h4></div>
+              <div id="reg2"><h4>Register 2:</h4></div>
+              <div id="befehlspointer"><h4>Befehlspointer:</h4></div>
+              <div id="befehlsanzahl"><h4>Anzahl Befehle durchlaufen:</h4></div>
+            </div>
+            <div class="span6">
+              <div id="reg1"><h4>Register 1:</h4></div>
+              <div id="reg3"><h4>Register 3:</h4></div>
+            </div>
+          </div>
+        </div> 
       </div>
-      <hr>
     </div> <!-- /container -->
-    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/jquery-2.0.3.js"></script>
     <script src="js/main.js"></script>
     <script src="js/akku.js"></script>
     <script src="js/zahl.js"></script>
