@@ -20,8 +20,10 @@ Befehlssatz.prototype.clr = function(reg){
 };
 
 Befehlssatz.prototype.add = function(reg){
-	var arrReg = reg.getBin().split('');
-	var arrAkku = this.akku.getBin().split('');
+	var strReg = reg.getBin().slice(0,1) + reg.getBin();
+	var arrReg = strReg.split('');
+	var strAkku = this.akku.getBin().slice(0,1)+this.akku.getBin();
+	var arrAkku = strAkku.split('');
 
 	var arrResult = [];
 
@@ -57,7 +59,7 @@ Befehlssatz.prototype.add = function(reg){
 			arrResult[i] = "0";
 			ueberlauf = false;
 			break;
-		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+		case ueberlauf && arrReg[i]=="0" && arrAkku[i] =="0":
 			arrResult[i] = "1";
 			ueberlauf = false;
 			break;
@@ -66,13 +68,19 @@ Befehlssatz.prototype.add = function(reg){
 			break;
 			}						
 		}
-		this.akku.setBinValue(arrResult.join(''));
-		return ueberlauf;
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
+		this.akku.setBinValue(arrResult.join('').slice(1,17));
+		if(arrResult[0]==arrResult[1]){	
+			return false;
+		};
+		return true;
 	};
 
 Befehlssatz.prototype.addd = function(zahl){
-	var arrReg = zahl.getBin().split('');
-	var arrAkku = this.akku.getBin().split('');
+	var strReg = zahl.getBin().slice(0,1) + zahl.getBin();
+	var arrReg = strReg.split('');
+	var strAkku = this.akku.getBin().slice(0,1)+this.akku.getBin();
+	var arrAkku = strAkku.split('');
 
 	var arrResult = [];
 
@@ -108,7 +116,7 @@ Befehlssatz.prototype.addd = function(zahl){
 			arrResult[i] = "0";
 			ueberlauf = false;
 			break;
-		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+		case ueberlauf && arrReg[i]=="0" && arrAkku[i] =="0":
 			arrResult[i] = "1";
 			ueberlauf = false;
 			break;
@@ -117,13 +125,19 @@ Befehlssatz.prototype.addd = function(zahl){
 			break;
 			}						
 		}
-		this.akku.setBinValue(arrResult.join(''));
-		return ueberlauf;
-};
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
+		this.akku.setBinValue(arrResult.join('').slice(1,17));
+		if(arrResult[0]==arrResult[1]){	
+			return false;
+		};
+		return true;
+	};
 
 Befehlssatz.prototype.inc = function(){
-	var arrReg = 
-	var arrAkku = this.akku.getBin().split('');
+	var oneStr = "00000000000000001";
+	var arrReg = oneStr.split('');
+	var strAkku = this.akku.getBin().slice(0,1)+this.akku.getBin();
+	var arrAkku = strAkku.split('');
 
 	var arrResult = [];
 
@@ -159,7 +173,7 @@ Befehlssatz.prototype.inc = function(){
 			arrResult[i] = "0";
 			ueberlauf = false;
 			break;
-		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+		case ueberlauf && arrReg[i]=="0" && arrAkku[i] =="0":
 			arrResult[i] = "1";
 			ueberlauf = false;
 			break;
@@ -168,28 +182,70 @@ Befehlssatz.prototype.inc = function(){
 			break;
 			}						
 		}
-		this.akku.setBinValue(arrResult.join(''));
-		return ueberlauf;
-
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
+		this.akku.setBinValue(arrResult.join('').slice(1,17));
+		if(arrResult[0]==arrResult[1]){	
+			return false;
+		};
+		return true;
 };
 
-Befehlssatz.prototype.dec = function(carryflag){
-	var tempInt = this.akku.getDec() - 1;
-	var min = -32768;
-	if (tempInt < min) {
-		this.akku.setValue(65536+this.akku.getDec());
+Befehlssatz.prototype.dec = function(){
+	var oneStr = "11111111111111111";
+	var arrReg = oneStr.split('');
+	var strAkku = this.akku.getBin().slice(0,1)+this.akku.getBin();
+	var arrAkku = strAkku.split('');
+
+	var arrResult = [];
+
+	var ueberlauf = false;
+
+	for (var i = arrReg.length - 1; i >= 0; i--) {
+		switch(true){
+		case !ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="0" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="0" && arrAkku[i] =="1":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="1" && arrAkku[i] =="0":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="0":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="0" && arrAkku[i] =="0":
+			arrResult[i] = "0";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="0" && arrAkku[i] =="0":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		default:
+			alert("something went wrong");
+			break;
+			}						
+		}
 		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
+		this.akku.setBinValue(arrResult.join('').slice(1,17));
+		if(arrResult[0]==arrResult[1]){	
+			return false;
+		};
 		return true;
-	}else if (tempInt > 32767) {
-		this.akku.setValue(this.akku.getDec()-65536);
-		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
-		return true;
-	}else{
-		this.akku.setValue(tempInt);
-		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
-		return false;
 	};
-};
 
 Befehlssatz.prototype.lwdd = function(reg,speicheraddr){
 	reg.setBinValue(this.speicher[speicheraddr] + this.speicher[speicheraddr+1]);
