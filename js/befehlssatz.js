@@ -16,59 +16,190 @@ Befehlssatz.prototype.setValues = function(akku,speicher,befehlpointer,carryflag
 Befehlssatz.prototype.clr = function(reg){
 	reg.clearReg();
 	this.carryflag = false;
-	this.befehlpointer = this.befehlpointer + 2;
+	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
 
 Befehlssatz.prototype.add = function(reg){
-	var tempInt = reg.getDec() + this.akku.getDec();
-	if (tempInt < −32768 || tempInt > 32767) {
-		this.carryflag = true;
-	}else{
-		this.akku.setValue(tempInt);
+	var arrReg = reg.getBin().split('');
+	var arrAkku = this.akku.getBin().split('');
+
+	var arrResult = [];
+
+	var ueberlauf = false;
+
+	for (var i = arrReg.length - 1; i >= 0; i--) {
+		switch(true){
+		case !ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="0" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="0" && arrAkku[i] =="1":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="1" && arrAkku[i] =="0":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="0":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="0" && arrAkku[i] =="0":
+			arrResult[i] = "0";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		default:
+			alert("something went wrong");
+			break;
+			}						
+		}
+		this.akku.setBinValue(arrResult.join(''));
+		return ueberlauf;
 	};
-	this.befehlpointer += 2;
-};
 
 Befehlssatz.prototype.addd = function(zahl){
-	var tempInt = zahl.getDec() + this.akku.getDec();
-	if (tempInt < −32768 || tempInt > 32767) {
-		this.carryflag = true;
-	}else{
-		this.akku.setValue(tempInt);
-	};
-	this.befehlpointer = this.befehlpointer + 2;
+	var arrReg = zahl.getBin().split('');
+	var arrAkku = this.akku.getBin().split('');
+
+	var arrResult = [];
+
+	var ueberlauf = false;
+
+	for (var i = arrReg.length - 1; i >= 0; i--) {
+		switch(true){
+		case !ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="0" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="0" && arrAkku[i] =="1":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="1" && arrAkku[i] =="0":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="0":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="0" && arrAkku[i] =="0":
+			arrResult[i] = "0";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		default:
+			alert("something went wrong");
+			break;
+			}						
+		}
+		this.akku.setBinValue(arrResult.join(''));
+		return ueberlauf;
 };
 
 Befehlssatz.prototype.inc = function(){
-	var this.akku.getDec() + 1;
-	if (tempInt > 32767) {
-		this.carryflag = true;
-	}else{
-		this.akku.setValue(tempInt);
-	};
-	this.befehlpointer = this.befehlpointer + 2;
+	var arrReg = 
+	var arrAkku = this.akku.getBin().split('');
+
+	var arrResult = [];
+
+	var ueberlauf = false;
+
+	for (var i = arrReg.length - 1; i >= 0; i--) {
+		switch(true){
+		case !ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="0" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="0" && arrAkku[i] =="1":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="1" && arrAkku[i] =="0":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="0":
+			arrResult[i] = "0";
+			ueberlauf = true;
+			break;
+		case !ueberlauf && arrReg[i]=="0" && arrAkku[i] =="0":
+			arrResult[i] = "0";
+			ueberlauf = false;
+			break;
+		case ueberlauf && arrReg[i]=="1" && arrAkku[i] =="1":
+			arrResult[i] = "1";
+			ueberlauf = false;
+			break;
+		default:
+			alert("something went wrong");
+			break;
+			}						
+		}
+		this.akku.setBinValue(arrResult.join(''));
+		return ueberlauf;
+
 };
 
-Befehlssatz.prototype.dec = function(){
-	var this.akku.getDec() + 1;
-	if (tempInt > 32767) {
-		this.carryflag = true;
+Befehlssatz.prototype.dec = function(carryflag){
+	var tempInt = this.akku.getDec() - 1;
+	var min = -32768;
+	if (tempInt < min) {
+		this.akku.setValue(65536+this.akku.getDec());
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
+		return true;
+	}else if (tempInt > 32767) {
+		this.akku.setValue(this.akku.getDec()-65536);
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
+		return true;
 	}else{
 		this.akku.setValue(tempInt);
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
+		return false;
 	};
-	this.akku.setValue(this.akku.getDec() - 1);
-	this.befehlpointer = this.befehlpointer + 2;
 };
 
 Befehlssatz.prototype.lwdd = function(reg,speicheraddr){
 	reg.setBinValue(this.speicher[speicheraddr] + this.speicher[speicheraddr+1]);
-	this.befehlpointer = this.befehlpointer + 2;
+	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
 
 Befehlssatz.prototype.swdd = function(reg,speicheraddr){
-	this.speicher[speicheraddr] = reg.getBin.slice(0,8);
-	this.speicher[speicheraddr] = reg.getBin.slice(8,16);
-	this.befehlpointer = this.befehlpointer + 2;
+	this.speicher[speicheraddr] = reg.getBin().slice(0,8);
+	this.speicher[speicheraddr+1] = reg.getBin().slice(8,16);
+	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
 
 Befehlssatz.prototype.and = function(reg){
@@ -90,7 +221,7 @@ Befehlssatz.prototype.and = function(reg){
 	    }
 	);
 
-	this.befehlpointer = this.befehlpointer + 2;
+	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
 
 Befehlssatz.prototype.or = function(reg){
@@ -113,7 +244,7 @@ Befehlssatz.prototype.or = function(reg){
 	    }
 	);
 
-	this.befehlpointer = this.befehlpointer + 2;
+	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
 
 Befehlssatz.prototype.not = function() {
@@ -130,37 +261,37 @@ Befehlssatz.prototype.not = function() {
 	    }
 	);
 
-	this.befehlpointer = this.befehlpointer + 2;
+	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
 
 
 Befehlssatz.prototype.bz = function(reg) {
 	if (this.akku.getDec()==0) {
-		this.befehlpointer = reg.getDec();
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
 Befehlssatz.prototype.bnz = function(reg) {
 	if (this.akku.getDec()!==0) {
-		this.befehlpointer = reg.getDec();
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
 Befehlssatz.prototype.bc = function(reg) {
 	if (this.carryflag == true) {
-		this.befehlpointer = reg.getDec();
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
 Befehlssatz.prototype.b = function(reg) {
-	this.befehlpointer = reg.getDec();
+	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
 
 Befehlssatz.prototype.bzd = function(adr) {
 	if (this.akku.getDec()==0) {
 		this.befehlpointer = adr.parseInt(binary, 2);
 	} else{
-		this.befehlpointer = this.befehlpointer + 2;
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
@@ -168,7 +299,7 @@ Befehlssatz.prototype.bnzd = function(adr) {
 	if (this.akku.getDec()!==0) {
 		this.befehlpointer = adr.parseInt(binary, 2);
 	} else{
-		this.befehlpointer = this.befehlpointer + 2;
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
@@ -176,10 +307,10 @@ Befehlssatz.prototype.bcd = function(adr) {
 	if (this.carryflag == true) {
 		this.befehlpointer = adr.parseInt(binary, 2);
 	} else{
-		this.befehlpointer = this.befehlpointer + 2;
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
 Befehlssatz.prototype.bd = function(adr) {
-		this.befehlpointer = adr.parseInt(binary, 2);
+		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };

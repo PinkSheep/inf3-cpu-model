@@ -46,9 +46,9 @@ Zahl.prototype.zweierkomp = function(zahl){
 		    zweierArr,
 		    function( intIndex, objValue ){
 		  			if (objValue == "0"){
-		  				objValue = "1";
+		  				zweierArr[intIndex] = "1";
 		  			} else {
-		  				objValue = "0";
+		  				zweierArr[intIndex] = "0";
 		  			}
 		    }
 		);
