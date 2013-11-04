@@ -1,6 +1,6 @@
 function Zahl(bitString){
 	this.bitString = bitString;
-	this.decValue = getDecValue(bitString);
+	this.decValue = this.getDecValue(bitString);
 }
 
 Zahl.prototype.getDec = function(){
@@ -12,23 +12,23 @@ Zahl.prototype.getBin = function(){
 };
 
 Zahl.prototype.getDecValue = function(bitString){
-	binArr = bitString.split('');
+	var binArr = bitString.split('');
 	if (binArr[0]=='0'){
-		return bitString.parseInt(binary,2);
+		return parseInt(bitString,2);
 	} else{
 		binArr[0] = '0';
 		var tempBitStr = binArr.join('');
-		return (-32768 + tempBitStr.parseInt(binary,2));
+		return (-32768 + parseInt(tempBitStr,2));
 	}
 };
 
 Zahl.prototype.setValue = function(zahl){
 	this.decValue = zahl;
-	this.bitString = zweierkomp(zahl);
+	this.bitString = this.zweierkomp(zahl);
 };
 
 Zahl.prototype.setBinValue = function(bitString){
-	this.decValue = getDecValue(bitString);
+	this.decValue = this.getDecValue(bitString);
 	this.bitString = bitString;
 };
 
@@ -69,4 +69,9 @@ Zahl.prototype.zweierkomp = function(zahl){
 		var tempStr = zahl.toString(2);
 		return zeroes.slice(0,16-tempStr.length).concat(tempStr);	
 	};
+};
+
+Zahl.prototype.clearReg = function(){
+	this.bitString = '0000000000000000';
+	this.decValue = 0;
 };
