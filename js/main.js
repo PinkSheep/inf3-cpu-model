@@ -217,6 +217,7 @@ window.onload = function() {
 		    befehlpointer.setValue(befehlpointer.getDec() + 2);
 		    break;
 		}
+		befehlszaehler.setValue(befehlszaehler.getDec() + 1);
 	}
 	refreshFrontend(akku,reg1,reg2,reg3,befehlpointer,befehlszaehler,speicherArr,carryflag);
 
@@ -377,6 +378,7 @@ window.onload = function() {
 		    befehlpointer.setValue(befehlpointer.getDec() + 2);
 		    break;
 		}
+		befehlszaehler.setValue(befehlszaehler.getDec() + 1);
 		refreshFrontend(akku,reg1,reg2,reg3,befehlpointer,befehlszaehler,speicherArr,carryflag);
 
 	});	
@@ -392,7 +394,7 @@ function refreshFrontend(akku,reg1,reg2,reg3,befehlpointer,befehlszaehler,speich
 	$("#reg2").append("<p class=\"insert-data\">"+reg2.getDec()+"</p><p class=\"insert-data\">"+reg2.getBin()+"</p>");
 	$("#reg3").append("<p class=\"insert-data\">"+reg3.getDec()+"</p><p class=\"insert-data\">"+reg3.getBin()+"</p>");
 	$("#befehlpointer").append("<p class=\"insert-data\">"+befehlpointer.getDec()+"</p class=\"insert-data\">");
-	$("#befehlszaehler").append("<p class=\"insert-data\">"+befehlszaehler+"</p class=\"insert-data\">");
+	$("#befehlsanzahl").append("<p class=\"insert-data\">"+befehlszaehler.getDec()+"</p class=\"insert-data\">");
 	$("#carryflag").append("<p class=\"insert-data\">"+carryflag+"</p class=\"insert-data\">");
 	$("#speicherTabelle").empty();
 	for(var index = 500; index < speicherArr.length; index+=2){

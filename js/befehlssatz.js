@@ -322,12 +322,13 @@ Befehlssatz.prototype.not = function() {
 	    arr,
 	    function( intIndex, objValue ){
 	  			if (objValue == "0"){
-	  				objValue = "1";
+	  				arr[intIndex] = "1";
 	  			} else {
-	  				objValue = "0";
+	  				arr[intIndex] = "0";
 	  			}
 	    }
 	);
+	this.akku.setBinValue(arr.join(''));
 
 	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
