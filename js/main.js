@@ -333,13 +333,13 @@ window.onload = function() {
 		    break;
 		 case bitString.slice(0,4) == "0001" && bitString.slice(6,8) == "11":
 		 	if (bitString.slice(4,6)=="00") {
-	    		befehlssatz.bc(akku);
+	    		befehlssatz.bc(akku,carryflag);
 	    	} else if (bitString.slice(4,6)=="01") {
-	    		befehlssatz.bc(reg1);
+	    		befehlssatz.bc(reg1,carryflag);
 	    	}else if (bitString.slice(4,6)=="10") {
-	    		befehlssatz.bc(reg2);
+	    		befehlssatz.bc(reg2,carryflag);
 	    	}else{
-	    		befehlssatz.bc(reg3);
+	    		befehlssatz.bc(reg3,carryflag);
 	    	};
 		    break;
 		 case bitString.slice(0,4) == "0001" && bitString.slice(6,8) == "11":
@@ -360,7 +360,7 @@ window.onload = function() {
 	    		befehlssatz.bnzd(bitString.slice(6,16));
 		    break;
 		 case bitString.slice(0,5) == "00111":
-	    		befehlssatz.bcd(bitString.slice(6,16));
+	    		befehlssatz.bcd(bitString.slice(6,16),carryflag);
 		    break;
 		 case bitString.slice(0,5) == "00100":
 	    		befehlssatz.bd(bitString.slice(6,16));
