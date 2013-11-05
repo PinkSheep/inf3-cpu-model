@@ -56,8 +56,7 @@ window.onload = function() {
 		    	speicherIndex = speicherIndex+2;
 		    }
 		);
-		for(var index = 500; index < speicherArr.length; index+=2){
-			var indexplus = index +1;
+		for(var index = 500; index < speicherArr.length; index+=2){var indexplus = index +1;
 			if (speicherArr[index].length<8) {
 				var zahl = new Zahl("0000000000000000");
 			}else{
@@ -86,7 +85,7 @@ window.onload = function() {
 	$("#run").click(function(){
 		while(befehlpointer.getDec()<opCodeArr.length){
 		var bitString = opCodeArr[befehlpointer.getDec()]+opCodeArr[befehlpointer.getDec()+1];
-		switch (true) {
+				switch (true) {
 		case bitString.slice(0,4) == "0000" && bitString.slice(6,9) == "101":
 	    	if (bitString.slice(4,6)=="00") {
 	    		befehlssatz.clr(akku);
@@ -141,9 +140,9 @@ window.onload = function() {
 	    		befehlssatz.swdd(reg3,parseInt(bitString.slice(6,16),2));
 	    	};
 		    break;
-		 case bitString.slice(0,8) == "00001001":
-		 	carryflag = befehlssatz.sll();
-		 	break;   		    
+		 case bitString.slice(0,8) == "00001100":
+		 	carryflag = befehlssatz.sll(); 
+		 	break;  		    
 		 case bitString.slice(0,4) == "0000" && bitString.slice(6,9) == "100":
 		 	if (bitString.slice(4,6)=="00") {
 	    		befehlssatz.and(akku);
@@ -154,7 +153,7 @@ window.onload = function() {
 	    	}else{
 	    		befehlssatz.and(reg3);
 	    	};
-		    break;  
+		    break;
 		 case bitString.slice(0,4) == "0000" && bitString.slice(6,9) == "110":
 		 	if (bitString.slice(4,6)=="00") {
 	    		befehlssatz.or(akku);
