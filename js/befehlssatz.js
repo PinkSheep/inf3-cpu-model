@@ -282,12 +282,13 @@ Befehlssatz.prototype.and = function(reg){
 	    	var akkuBool = value=='1'?true:false;
 	    	var regBool = regArr[index]=='1'?true:false;
 	    	if (akkuBool && regBool) {
-	    		value = '1';
+	    		akkuArr[index] = '1';
 	    	}else{
-	    		value = '0';
+	    		akkuArr[index] = '0';
 	    	};
 	    }
 	);
+	this.akku.setBinValue(akkuArr.join(''));
 
 	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
@@ -304,13 +305,15 @@ Befehlssatz.prototype.or = function(reg){
 	    	var akkuBool = value=='1'?true:false;
 	    	var regBool = regArr[index]=='1'?true:false;
 	    	if (akkuBool || regBool) {
-	    		value = '1';
+	    		akkuArr[index] = '1';
 	    	}else{
-	    		value = '0';
+	    		akkuArr[index] = '0';
 	    	};
 
 	    }
 	);
+
+	thid.akku.setBinValue(akkuArr.join(''));
 
 	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
@@ -388,4 +391,7 @@ Befehlssatz.prototype.bcd = function(adr,carryflag) {
 
 Befehlssatz.prototype.bd = function(adr) {
 		this.befehlpointer.setValue(parseInt(adr, 2));
+};
+
+Befehlssatz.prototype.end = function() {
 };

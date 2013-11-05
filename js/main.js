@@ -62,6 +62,22 @@ window.onload = function() {
 			$("#speicherTabelle").append("<tr><td>"+index+"+"+indexplus+"</td><td>"+zahl.getDec()+"</td><td>"+speicherArr[index]+speicherArr[indexplus]+"</td></tr>");
 		}
 	});
+	// Reset Button
+	$("#reset").click(function(){
+		akku.setValue(0);
+		reg1.setValue(0);
+		reg2.setValue(0);
+		reg3.setValue(0);
+		befehlszaehler.setValue(0);
+		befehlpointer.setValue(100);
+		carryflag = false;
+		speicherArr = [];
+		opCodeArr = [];
+		$("#befehlTabelle").empty();
+		refreshFrontend(akku,reg1,reg2,reg3,befehlpointer,befehlszaehler,speicherArr,carryflag);
+
+	});
+
 	//Run Modus
 	$("#run").click(function(){
 		while(befehlpointer.getDec()<opCodeArr.length){
@@ -214,6 +230,7 @@ window.onload = function() {
 	    		befehlssatz.bd(bitString.slice(6,16));
 		    break;			    		    
 		  default:
+		  	befehlssatz.end();
 		    befehlpointer.setValue(befehlpointer.getDec() + 2);
 		    break;
 		}
@@ -375,6 +392,7 @@ window.onload = function() {
 	    		befehlssatz.bd(bitString.slice(6,16));
 		    break;			    		    
 		  default:
+		  	befehlssatz.end();
 		    befehlpointer.setValue(befehlpointer.getDec() + 2);
 		    break;
 		}
