@@ -323,29 +323,35 @@ Befehlssatz.prototype.not = function() {
 
 Befehlssatz.prototype.bz = function(reg) {
 	if (this.akku.getDec()==0) {
+		this.befehlpointer.setValue(reg.getDec());
+	}else{
 		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
 Befehlssatz.prototype.bnz = function(reg) {
 	if (this.akku.getDec()!==0) {
+		this.befehlpointer.setValue(reg.getDec());
+	}else{
 		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
-Befehlssatz.prototype.bc = function(reg) {
-	if (this.carryflag == true) {
+Befehlssatz.prototype.bc = function(reg,carryflag) {
+	if (carryflag) {
+		this.befehlpointer.setValue(reg.getDec());
+	}else{
 		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
 Befehlssatz.prototype.b = function(reg) {
-	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
+	this.befehlpointer.setValue(reg.getDec());
 };
 
 Befehlssatz.prototype.bzd = function(adr) {
 	if (this.akku.getDec()==0) {
-		this.befehlpointer = adr.parseInt(binary, 2);
+		this.befehlpointer.setValue(parseInt(adr, 2));
 	} else{
 		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
@@ -353,20 +359,20 @@ Befehlssatz.prototype.bzd = function(adr) {
 
 Befehlssatz.prototype.bnzd = function(adr) {
 	if (this.akku.getDec()!==0) {
-		this.befehlpointer = adr.parseInt(binary, 2);
+		this.befehlpointer.setValue(parseInt(adr, 2));
 	} else{
 		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
-Befehlssatz.prototype.bcd = function(adr) {
-	if (this.carryflag == true) {
-		this.befehlpointer = adr.parseInt(binary, 2);
+Befehlssatz.prototype.bcd = function(adr,carryflag) {
+	if (carryflag) {
+		this.befehlpointer.setValue(parseInt(adr, 2));
 	} else{
 		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 	};
 };
 
 Befehlssatz.prototype.bd = function(adr) {
-		this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
+		this.befehlpointer.setValue(parseInt(adr, 2));
 };
