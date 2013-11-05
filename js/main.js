@@ -56,8 +56,10 @@ window.onload = function() {
 		    	speicherIndex = speicherIndex+2;
 		    }
 		);
-		for(var index = 500; index < speicherArr.length; index++){
-			$("#speicherTabelle").append("<tr><td>"+index+"</td><td>"+speicherArr[index]+"</td></tr>");
+		for(var index = 500; index < speicherArr.length; index+=2){
+			var indexplus = index +1;
+			var zahl = new Zahl(speicherArr[index]+speicherArr[indexplus]);
+			$("#speicherTabelle").append("<tr><td>"+index+"+"+indexplus+"</td><td>"+zahl.getDec()+"</td><td>"+speicherArr[index]+speicherArr[indexplus]+"</td></tr>");
 		}
 	});
 	//Run Modus
@@ -118,7 +120,10 @@ window.onload = function() {
 	    	}else{
 	    		befehlssatz.swdd(reg3,parseInt(bitString.slice(6,16),2));
 	    	};
-		    break;  		    
+		    break;
+		 case bitString.slice(0,8) == "00001001":
+		 	carryflag = befehlssatz.sll();
+		 	break;   		    
 		 case bitString.slice(0,4) == "0000" && bitString.slice(6,9) == "100":
 		 	if (bitString.slice(4,6)=="00") {
 	    		befehlssatz.and(akku);
@@ -129,7 +134,7 @@ window.onload = function() {
 	    	}else{
 	    		befehlssatz.and(reg3);
 	    	};
-		    break;
+		    break;  
 		 case bitString.slice(0,4) == "0000" && bitString.slice(6,9) == "110":
 		 	if (bitString.slice(4,6)=="00") {
 	    		befehlssatz.or(akku);
@@ -275,7 +280,10 @@ window.onload = function() {
 	    	}else{
 	    		befehlssatz.swdd(reg3,parseInt(bitString.slice(6,16),2));
 	    	};
-		    break;  		    
+		    break;
+		 case bitString.slice(0,8) == "00001100":
+		 	carryflag = befehlssatz.sll(); 
+		 	break;  		    
 		 case bitString.slice(0,4) == "0000" && bitString.slice(6,9) == "100":
 		 	if (bitString.slice(4,6)=="00") {
 	    		befehlssatz.and(akku);
@@ -387,8 +395,10 @@ function refreshFrontend(akku,reg1,reg2,reg3,befehlpointer,befehlszaehler,speich
 	$("#befehlszaehler").append("<p class=\"insert-data\">"+befehlszaehler+"</p class=\"insert-data\">");
 	$("#carryflag").append("<p class=\"insert-data\">"+carryflag+"</p class=\"insert-data\">");
 	$("#speicherTabelle").empty();
-	for(var index = 500; index < speicherArr.length; index++){
-		$("#speicherTabelle").append("<tr><td>"+index+"</td><td>"+speicherArr[index]+"</td></tr>");
+	for(var index = 500; index < speicherArr.length; index+=2){
+			var indexplus = index +1;
+			var zahl = new Zahl(speicherArr[index]+speicherArr[indexplus]);
+			$("#speicherTabelle").append("<tr><td>"+index+"+"+indexplus+"</td><td>"+zahl.getDec()+"</td><td>"+speicherArr[index]+speicherArr[indexplus]+"</td></tr>");
 	}
 }
 

@@ -258,6 +258,18 @@ Befehlssatz.prototype.swdd = function(reg,speicheraddr){
 	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
 };
 
+Befehlssatz.prototype.sll = function(){
+	var strAkku = this.akku.getBin();
+	var arrAkku = strAkku.split('');
+	arrAkku[16] = "0";
+	this.akku.setBinValue(arrAkku.slice(1,17).join(''));
+	this.befehlpointer.setValue(this.befehlpointer.getDec()+2);
+	if (arrAkku[0]=="0") {
+		return false;
+	};
+	return true;
+}
+
 Befehlssatz.prototype.and = function(reg){
 	//akku in binary
 	var akkuArr = this.akku.getBin().split('');
