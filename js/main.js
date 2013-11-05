@@ -58,7 +58,11 @@ window.onload = function() {
 		);
 		for(var index = 500; index < speicherArr.length; index+=2){
 			var indexplus = index +1;
-			var zahl = new Zahl(speicherArr[index]+speicherArr[indexplus]);
+			if (speicherArr[index].length<8) {
+				var zahl = new Zahl("0000000000000000");
+			}else{
+				var zahl = new Zahl(speicherArr[index]+speicherArr[indexplus]);
+			};
 			$("#speicherTabelle").append("<tr><td>"+index+"+"+indexplus+"</td><td>"+zahl.getDec()+"</td><td>"+speicherArr[index]+speicherArr[indexplus]+"</td></tr>");
 		}
 	});
@@ -417,7 +421,11 @@ function refreshFrontend(akku,reg1,reg2,reg3,befehlpointer,befehlszaehler,speich
 	$("#speicherTabelle").empty();
 	for(var index = 500; index < speicherArr.length; index+=2){
 			var indexplus = index +1;
-			var zahl = new Zahl(speicherArr[index]+speicherArr[indexplus]);
+			if (speicherArr[index].length<8) {
+				var zahl = new Zahl("0000000000000000");
+			}else{
+				var zahl = new Zahl(speicherArr[index]+speicherArr[indexplus]);
+			};
 			$("#speicherTabelle").append("<tr><td>"+index+"+"+indexplus+"</td><td>"+zahl.getDec()+"</td><td>"+speicherArr[index]+speicherArr[indexplus]+"</td></tr>");
 	}
 }
