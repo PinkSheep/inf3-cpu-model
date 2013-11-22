@@ -1,6 +1,10 @@
-function Zahl(bitString){
-	this.bitString = bitString;
-	this.decValue = this.getDecValue(bitString);
+/*
+This class represents a number. It is stored as decimal and binary value.
+The binary value is stored in a two's complement format with a length of 16 bytes.
+*/
+function Zahl(decValue){
+	this.bitString = this.zweierkomp(decValue);
+	this.decValue = decValue;
 }
 
 Zahl.prototype.getDec = function(){
