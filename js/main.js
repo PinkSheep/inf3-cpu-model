@@ -4,27 +4,28 @@ As input it recieves operations represented by assembler-like instructions which
 Furthermore you can also write the memory.
 The specific instuctions and the assignment can be found at https://github.com/PinkSheep/inf3-cpu-model
 
-There is no errorhadling, so make sure your opcode is actually correct :)
+Due to lack of time (this is part of a 3 week assignment) there is no errorhadling so make sure your opcode is actually correct and works :)
 */
-window.onload = function() { 
+
+window.onload = function() {
 
 	// inherit Zahl
-	Register.prototype = new Zahl("0000000000000000");
+	Register.prototype = new Zahl(0);
 
 	// correct the constructor pointer because it points to Zahl
 	Register.prototype.constructor = Register;
 
 	//Initialize all the nececary variables
-	var akku = new Register("0000000000000000");
-	var reg1 = new Register("0000000000000000");
-	var reg2 = new Register("0000000000000000");
-	var reg3 = new Register("0000000000000000");
+	var akku = new Register(0);
+	var reg1 = new Register(0);
+	var reg2 = new Register(0);
+	var reg3 = new Register(0);
 	speicherArr = [];
 	opCodeArr = [];
 	var carryflag = false;
-	var befehlszaehler = new Zahl("0000000000000000");
+	var befehlszaehler = new Zahl(0);
 	var tempint = 100;
-	var befehlpointer = new Zahl("0000000001100100");
+	var befehlpointer = new Zahl(100);
 	var befehlssatz = new Befehlssatz(akku,speicherArr,befehlpointer,carryflag);
 
 	refreshFrontend(akku,reg1,reg2,reg3,befehlpointer,befehlszaehler,speicherArr,carryflag);
@@ -63,7 +64,7 @@ window.onload = function() {
 			);
 		for(var index = 500; index < speicherArr.length; index+=2){var indexplus = index +1;
 			if (speicherArr[index].length<8) {
-				var zahl = new Zahl("0000000000000000");
+				var zahl = new Zahl(0);
 			}else{
 				var zahl = new Zahl(speicherArr[index]+speicherArr[indexplus]);
 			};
@@ -101,10 +102,10 @@ window.onload = function() {
 		refreshFrontend(akku,reg1,reg2,reg3,befehlpointer,befehlszaehler,speicherArr,carryflag);
 
 	});	
-	
+
 	function callOpCodeFunction(){
 			var bitString = opCodeArr[befehlpointer.getDec()]+opCodeArr[befehlpointer.getDec()+1];
-			//interprets the opcode and calls the correcr function of the Befehlssatz class
+			//interprets the opcode and calls the correcT function of the Befehlssatz class
 			switch (true) {
 				case bitString.slice(0,4) == "0000" && bitString.slice(6,9) == "101":
 				if (bitString.slice(4,6)=="00") {
@@ -278,7 +279,7 @@ function refreshFrontend(akku,reg1,reg2,reg3,befehlpointer,befehlszaehler,speich
 	for(var index = 500; index < speicherArr.length; index+=2){
 		var indexplus = index +1;
 		if (speicherArr[index].length<8) {
-			var zahl = new Zahl("0000000000000000");
+			var zahl = new Zahl(0);
 		}else{
 			var zahl = new Zahl(speicherArr[index]+speicherArr[indexplus]);
 		};
@@ -307,7 +308,7 @@ function parseOpcode(mnemonic){
 			break;
 		case mnemonic.slice(0,4) == "ADDD":
 			var binary = parseInt(mnemonic.slice(6,mnemonic.length),10);
-			var zahl1 = new Zahl("0000000000000000");
+			var zahl1 = new Zahl(0);
 			zahl1.setValue(parseInt(mnemonic.slice(6,mnemonic.length),10));
 			var min = -16384;
 			if (zahl1.getDec() < min || zahl1.getDec() > 16383) {
